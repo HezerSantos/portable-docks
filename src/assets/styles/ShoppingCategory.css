@@ -7,3 +7,15 @@
    
 }
 
+.loading-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+@media(max-width: 1000px){
+    .shopping-grid{
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
+}
+

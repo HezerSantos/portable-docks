@@ -43,20 +43,25 @@ const ResponsiveIcon = () => {
 
 function App() {
     const {name} = useParams();
+    const [shoppingCart, setShoppingCart] = useState(new Map())
+
+    // useEffect(() => {
+    //   console.log(shoppingCart)
+    // }, [shoppingCart])
     return (
         <>
             <nav className='main-navigation'>
                 <h1><Link to="/">Portable Docks</Link></h1>
                 <ul>
                     <li> <Link to ="electronics">Electronics</Link> </li>
-                    <li><Link to='jewelry'>Jewelry</Link></li>
+                    <li><Link to='jewelery'>Jewelery</Link></li>
                     <li><Link to='mensclothing'>Men's Clothing</Link></li>
                     <li><Link to='womensclothing'>Women's Clothing</Link></li>
                     <ResponsiveIcon />
                 </ul>
             </nav>
             <main>
-              <Outlet/>
+              <Outlet context={{"set": setShoppingCart, "state": shoppingCart}}/>
             </main>
         </>
 

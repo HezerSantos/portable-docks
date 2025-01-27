@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
-import fetchCategoryComponent from "./FetchCategoryComponent";
+import fetchCategoryComponent from "./FetchCategoryComponent.jsx";
 import ProductCard from "./ProductCard.jsx";
-
-import './assets/styles/ShoppingCategory.css'
 import LoadingScreen from "./Loading.jsx";
 
+import './assets/styles/ShoppingCategory.css'
 
-const fetchElectronics = async (setElectronicData, setIsLoading) => {
-    const electronicData = await fetchCategoryComponent('electronics')
-    setElectronicData(electronicData)
+
+const fetchMenC = async (setMenC, setIsLoading) => {
+    const menCData = await fetchCategoryComponent("men's clothing")
+    setMenC(menCData)
     setIsLoading(false)
-    
 }
 
 
-const Electronics = () => {
-    const [electronicData, setElectronicData] = useState([])
+const MenC = () => {
+    const [menCData, setMenC] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    useEffect(() => {
-        fetchElectronics(setElectronicData, setIsLoading)
+    useEffect(()=> {
+        fetchMenC(setMenC, setIsLoading)
     }, [])
     return (
         <>
@@ -29,7 +28,7 @@ const Electronics = () => {
             )}
             {!isLoading && (
                 <section className="shopping-grid">
-                    {electronicData.map(product => {
+                    {menCData.map(product => {
                         return (
                             <ProductCard 
                                 key = {product.id}
@@ -41,10 +40,10 @@ const Electronics = () => {
                             />
                         )
                     })}
-            </section>
+                </section>
             )}
         </>
     )
 }
 
-export default Electronics;
+export default MenC;

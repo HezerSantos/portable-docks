@@ -16,3 +16,33 @@ button{
 a{
   text-decoration: none;
 }
+
+
+.loading-circle{
+  width: 8rem;
+  height: 8rem;
+  background: conic-gradient(black 0deg 90deg, transparent 90deg 360deg);
+  border-radius: 50%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: loading .3s linear infinite;
+}
+
+.loading-circle div{
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid black;
+}
+
+@keyframes loading {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
