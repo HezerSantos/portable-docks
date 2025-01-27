@@ -1,0 +1,9 @@
+.shopping-grid{
+    padding: clamp(5rem, 15%, 10rem);
+    column-gap: 10rem;
+    row-gap: 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
+   
+}
+
