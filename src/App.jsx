@@ -9,34 +9,38 @@ import Icon from '@mdi/react';
 import DefaultShop from './DefaultShop';
 import Electronics from './Electronics';
 
-const ResponsiveIcon = () => {
-    const [iconSize, setIconSize] = useState(24); // Set initial size (in px)
+const ResponsiveIcon = ({shoppingCart, setTotalQuantity, totalQuantity}) => {
+    const [iconSize, setIconSize] = useState(24);
   
     useEffect(() => {
-      // Function to handle window resize
       const handleResize = () => {
         if (window.innerWidth < 768) {
-          setIconSize(.3);  // Small size for mobile
+          setIconSize(.3); 
         } else if (window.innerWidth < 1024) {
-          setIconSize(.8);  // Medium size for tablets
+          setIconSize(.8); 
         } else {
-          setIconSize(1);  // Larger size for desktop
+          setIconSize(1); 
         }
       };
-  
-      // Add event listener on mount
+
       window.addEventListener('resize', handleResize);
-  
-      // Run on initial render
       handleResize();
-  
-      // Clean up event listener on unmount
       return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+      let totalHelperQuantity = 0
+      shoppingCart.forEach((value) => {
+        totalHelperQuantity += value.quantity
+        totalHelperQuantity = totalHelperQuantity > 100 ? '100+' : totalHelperQuantity
+      })
+      setTotalQuantity(totalHelperQuantity)
+    }, [shoppingCart]);
+
     return (
-        <li>
+        <li className='shopping-cart-icon'>
           <Link to={"shoppingcart"}><Icon path={mdiCartOutline} size={iconSize} /></Link>
+          <p>{totalQuantity}</p>
         </li>
       );
 }
@@ -44,6 +48,7 @@ const ResponsiveIcon = () => {
 function App() {
     const {name} = useParams();
     const [shoppingCart, setShoppingCart] = useState(new Map())
+    const [totalQuantity, setTotalQuantity] = useState(0)
 
     // useEffect(() => {
     //   console.log(shoppingCart)
@@ -57,7 +62,11 @@ function App() {
                     <li><Link to='jewelery'>Jewelery</Link></li>
                     <li><Link to='mensclothing'>Men's Clothing</Link></li>
                     <li><Link to='womensclothing'>Women's Clothing</Link></li>
-                    <ResponsiveIcon />
+                    <ResponsiveIcon 
+                      shoppingCart={shoppingCart} 
+                      setTotalQuantity={setTotalQuantity}
+                      totalQuantity={totalQuantity}
+                    />
                 </ul>
             </nav>
             <main>

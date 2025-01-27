@@ -19,11 +19,17 @@ const CartItem = ({title, image, price, quantity}) => {
 const ShoppingCart = () => {
     const shop = useOutletContext()
     const [isEmpty, setIsEmpty] = useState(true)
+    const [totalPrice, setTotalPrice] = useState(0)
     useEffect(() => {
         if(shop.state.size === 0){
             setIsEmpty(true)
         } else {
             setIsEmpty(false)
+            let totalPrice = 0
+            shop.state.forEach((value) => {
+                totalPrice += value.quantity * value.price
+            })
+            setTotalPrice(totalPrice)
         }
       }, [shop.state])
 
@@ -47,6 +53,10 @@ const ShoppingCart = () => {
                         />
                         )
                 })}
+                <section className="proceed-to-checkout">
+                    <h1>Total: {totalPrice}</h1>
+                    <button>Proceed to Checkout</button>
+                </section>
             </section>
         )}
 
