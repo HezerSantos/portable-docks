@@ -29,7 +29,7 @@ const ShoppingCart = () => {
             shop.state.forEach((value) => {
                 totalPrice += value.quantity * value.price
             })
-            setTotalPrice(`$${totalPrice}`)
+            setTotalPrice(`$${Math.floor(totalPrice)}`)
         }
       }, [shop.state])
 
